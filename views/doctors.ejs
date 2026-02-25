@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctors</title>
+  </head>
+  <style>
+    img {
+        width: 400px;
+    }
+    .content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .box {
+        padding: 10px;
+        border: 1px solid black;
+    }
+  </style>
+  <body>
+    <header>
+        <a href="">Add Disease</a>
+    </header>
+    <main class="doctors">
+      <div class="title">
+        <h1>Doctors Page</h1>
+      </div>
+      <div class="content">
+        <% doctors.forEach(el => { %>
+             <div class="box">
+                <div class="images">
+                    <img src="<%= el.imageUrl %>" alt="">
+                </div>
+                <div class="desc">
+                    <h4><%= el.name %></h4>
+                    <p><%= el.phoneNumber %></p>
+                    <p><%= el.specialization %></p>
+                    <div class="btn">
+                        <a href="">Detail</a>
+                    </div>
+                </div>
+             </div>
+        <% }) %>
+      </div>
+    </main>
+  </body>
+</html>
