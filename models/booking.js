@@ -4,7 +4,11 @@ module.exports = (sequelize, DataTypes) => {
   class Booking extends Model {
     //getter format date booking date
     get formatDate() {
-      return new Date(this.bookingDate).toISOString().split("T")[0];
+      return new Date(this.bookingDate).toLocaleDateString("en-US", {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+      });
     }
 
     // Instance method

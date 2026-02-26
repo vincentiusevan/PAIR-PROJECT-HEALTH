@@ -4,12 +4,15 @@
     <div class="container">
         <div class="title">
             <h1>Edit Doctors</h1>
-            <% if (errors) { %>
-                <% errors.forEach(err => { %>
-                <p class="error"><%= err %> </p>
-                <% }) %>
+             <% if (errors) { %>
+                <div class="errors">
+                    <h3>WARNING !!</h3>
+                    <% errors.forEach(err => { %>
+                    <p class="error"><%= err %> </p>
+                    <% }) %>
+                </div>
             <% } %>
-            </div>
+        </div>
         <form class="content" action="/doctors/<%= doctors.id %>/editDoctors" method="post">
             <div class="column">
                 <label for="">Image URL</label>
@@ -32,7 +35,7 @@
                 <label for="">Degree</label>
                 <% let degree = ["S1", "S2", "S3"] %>
                 <select name="degree" id="" value="degree">
-                <% degreçe.forEach(degree => { %>
+                <% degree.forEach(degree => { %>
                     <option value="<%= degree %>"><%= degree %></option>
                 <% }) %>
                 </select>

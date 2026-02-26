@@ -3,13 +3,14 @@
 <main class="doctors">
   <div class="container">
     <div class="title">
-    <h1>Doctors Page</h1>
+      <h1>Doctors Page</h1>
+      <% if (notif) { %>
+      <div class="notifDelete">
+        <h3>WARNING !!</h1>
+        <p ><%= notif %></p>
+      </div>
+       <% } %>
     </div>
-    <% if (notif) { %>
-    <div class="notifDelete">
-      <p ><%= notif %></p>
-    </div>
-    <% } %>
     <form class="search" action="/doctors" method="get">
       <input type="text" name="search">
       <button class="btn" type="submit">Search</button>
@@ -28,9 +29,9 @@
                   <p>Specialization <%= el.specialization %></p>
                   <p>Degree <%= el.degree %></p>
                   <div class="btnWrap">
-                      <a class="btn" href="/doctors/<%= el.id %>/listPatientBookings">Patients</a>
+                      <a class="btnDetail" href="/doctors/<%= el.id %>/listPatientBookings">Patients</a>
                       <a class="btn" href="/doctors/<%= el.id %>/editDoctors">Edit</a>
-                      <a class="btn" href="/doctors/deleteDoctors/<%= el.id %>">Delete</a>
+                      <a class="btnDelete" href="/doctors/deleteDoctors/<%= el.id %>">Delete</a>
                   </div>
               </div>
             </div>

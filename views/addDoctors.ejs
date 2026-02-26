@@ -4,13 +4,14 @@
     <div class="container">
         <div class="title">
             <h1>Add Doctors</h1>
-            <div class="errors">
-                <% if (errors) { %>
+            <% if (errors) { %>
+                <div class="errors">
+                    <h3>WARNING !!</h3>
                     <% errors.forEach(err => { %>
                     <p class="error"><%= err %> </p>
                     <% }) %>
-                <% } %>
-            </div>
+                </div>
+            <% } %>
         </div>
         <form class="content" action="/doctors/addDoctors" method="post">
             <div class="column">

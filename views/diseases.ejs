@@ -1,46 +1,50 @@
 <%- include('headerDoctors') %>
 
-    <main>
-      <div class="title">
+<main>
+    <div class="container">
+        <div class="title">
         <h1>Diseases</h1>
         <% if (notif) { %>
         <div class="notifDelete">
-          <p ><%= notif %></p>
+            <p ><%= notif %></p>
         </div>
         <% } %>
-      </div>
-      <form action="/doctors/diseases" method="get">
-        <input type="text" name="search">
-        <button type="submit">Search</button>
-      </form>
-      <div class="btnAdd">
-        <a href="/doctors/addDiseases">Add Diseases</a>
-      </div>
-      <div class="content">
-        <table border="1">
-          <tr>
-            <th>Name Diseases</th>
-            <th>Description</th>
-            <th>Level</th>
-            <th>Medicine</th>
-            <th>Specialization</th>
-            <th>Action</th>
-          </tr>
-          <% diseases.forEach(el => { %>
-           <tr>
-            <td><%= el.name %></td>
-            <td><%= el.description %></td>
-            <td><%= el.level %></td>
-            <td><%= el.medicine %></td>
-            <td><%= el.specialization %></td>
-            <td>
-                <a href="/doctors/<%= el.id %>/editDiseases">Edit</a>
-                <a href="/doctors/deleteDiseases/<%= el.id %>">Delete</a>
-            </td>
-           </tr>
-          <% }) %>
-        </table>
-      </div>
-    </main>
+        </div>
+        <form class="search" action="/doctors/diseases" method="get">
+            <input type="text" name="search">
+            <button class="btn" type="submit">Search</button>
+        </form>
+        <div class="btnAdd">
+            <a class="btn" href="/doctors/addDiseases">Add Diseases</a>
+        </div>
+        <div class="content">
+            <table>
+                <tr>
+                    <th>No</th>
+                    <th>Name Diseases</th>
+                    <th>Description</th>
+                    <th>Level</th>
+                    <th>Medicine</th>
+                    <th>Specialization</th>
+                    <th>Action</th>
+                </tr>
+                <% diseases.forEach((el, i) => { %>
+                <tr>
+                    <td><%= i + 1 %></td>
+                    <td><%= el.name %></td>
+                    <td><%= el.description %></td>
+                    <td><%= el.level %></td>
+                    <td><%= el.medicine %></td>
+                    <td><%= el.specialization %></td>
+                    <td>
+                        <a class="btn" href="/doctors/<%= el.id %>/editDiseases">Edit</a>
+                        <a class="btnDelete" href="/doctors/deleteDiseases/<%= el.id %>">Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </table>
+        </div>
+    </div>
+</main>
 
 <%- include('footerDoctors') %>

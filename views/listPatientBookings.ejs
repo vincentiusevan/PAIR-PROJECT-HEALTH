@@ -1,47 +1,47 @@
 <%- include('headerDoctors') %>
 
-<main>
+<main class="listPatient">
     <div class="title">
-    <h1>List Patient Booking</h1>
+        <h1>List Patient Booking</h1>
     </div>
     <div class="content">
-    <table border="1">
-        <tr>
-            <th>No</th>
-            <th>Name Patient / UserId</th>
-            <th>Name Doctor / DoctorId</th>
-            <th>Diseases / DiseaseId</th>
-            <th>Booking Date</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-        <% bookings.forEach((el, i) => { %>
+        <table>
             <tr>
-            <td><%= i + 1 %></td>
-            <td><%= el.User.username %></td>
-            <td><%= el.Doctor.name %></td>
-            <td><%= el.Disease.name %></td>
-            <td><%= el.formatDate %></td>
-            <td><%= el.status %></td>
-            <td>
-            <% if (el.status !== "Done") { %>
-                <form action="/doctors/booking/<%= el.id %>/switchStatus" method="post">
-                <select name="status" onchange="this.form.submit()"> 
-                    <option selected disabled hidden>Switch Status</option>
-                    <option value="Pending" <%= el.status === "Pending" ? "selected" : "" %>>
-                    Pending
-                    </option>
-                    <option value="Done">Done</option>
-                    <option value="Cancel">Cancel</option>
-                </select>
-                </form>
-            <% } else { %>
-                <b>Status Locked</b>
-            <% } %>
-            </td>
+                <th>No</th>
+                <th>Name Patient</th>
+                <th>Name Doctor</th>
+                <th>Diseases</th>
+                <th>Booking Date</th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
-        <% }) %>
-    </table>
+            <% bookings.forEach((el, i) => { %>
+                <tr class="trTd">
+                <td><%= i + 1 %></td>
+                <td><%= el.User.username %></td>
+                <td><%= el.Doctor.name %></td>
+                <td><%= el.Disease.name %></td>
+                <td><%= el.formatDate %></td>
+                <td><%= el.status %></td>
+                <td class="status">
+                <% if (el.status !== "Done") { %>
+                    <form action="/doctors/booking/<%= el.id %>/switchStatus" method="post">
+                    <select class="btnSelect" name="status" onchange="this.form.submit()"> 
+                        <option selected disabled hidden>Switch Status</option>
+                        <option value="Pending" <%= el.status === "Pending" ? "selected" : "" %>>
+                        Pending
+                        </option>
+                        <option value="Done">Done</option>
+                        <option value="Cancel">Cancel</option>
+                    </select>
+                    </form>
+                <% } else { %>
+                    <p class="statusLocked">Status Locked</p>
+                <% } %>
+                </td>
+                </tr>
+            <% }) %>
+        </table>
     </div>
 </main>
 
