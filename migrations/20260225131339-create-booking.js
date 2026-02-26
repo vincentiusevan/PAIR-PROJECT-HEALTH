@@ -10,7 +10,9 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: 'pending'
       },
       UserId: {
         type: Sequelize.INTEGER,
