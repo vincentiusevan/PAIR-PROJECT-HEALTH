@@ -31,15 +31,27 @@ class PatientController {
                 return res.send('Please select at least one symptom')
             }
 
+            let selectedSymptoms = symptoms
+            if (!Array.isArray(selectedSymptoms)) {
+                selectedSymptoms = [selectedSymptoms]
+            }
+
             await User.update(
                 { age, gender },
                 { where: { id: userId } }
             )
 
-            const disease = await Disease.findOne()
+            const disease = await Disease.findOne({
+                include: {
+                    model: Symptom,
+                    where: {
+                        id: selectedSymptoms
+                    }
+                }
+            })
 
             if (!disease) {
-                return res.send('Disease data not available')
+                return res.send('No disease matches selected symptoms')
             }
 
             const doctor = await Doctor.findOne({
@@ -58,12 +70,6 @@ class PatientController {
                 DiseaseId: disease.id
             })
 
-            let selectedSymptoms = symptoms
-
-            if (!Array.isArray(selectedSymptoms)) {
-                selectedSymptoms = [selectedSymptoms]
-            }
-
             await booking.addSymptoms(selectedSymptoms)
 
             res.redirect('/patients')
@@ -73,6 +79,62 @@ class PatientController {
             res.send(error)
         }
     }
+
+    static async dashboard(req, res) {
+        try {
+            const userId = req.session.userId
+
+            const user = await User.findByPk(userId)
+
+            const totalBookings = await Booking.count({
+                where: { UserId: userId }
+            })
+
+            const pending = await Booking.count({
+                where: { UserId: userId, status: 'pending' }
+            })
+
+            const confirmed = await Booking.count({
+                where: { UserId: userId, status: 'confirmed' }
+            })
+
+            res.render('patientDashboard', {
+                user,
+                totalBookings,
+                pending,
+                confirmed
+            })
+
+        } catch (error) {
+            console.log(error);
+
+            res.send(error)
+        }
+    }
+
+    static async myBookings(req, res) {
+        try {
+            const userId = req.session.userId
+
+            const bookings = await Booking.findAll({
+                where: { UserId: userId },
+                include: [
+                    Doctor,
+                    Disease,
+                    Symptom
+                ],
+                order: [['createdAt', 'DESC']]
+            })
+
+            res.render('listPatientBookings', { bookings })
+
+        } catch (error) {
+            console.log(error)
+            res.send(error)
+        }
+    }
 }
 
 module.exports = PatientController;
+
+
