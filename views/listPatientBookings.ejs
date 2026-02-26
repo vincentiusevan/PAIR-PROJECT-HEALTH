@@ -1,0 +1,48 @@
+<%- include('headerDoctors') %>
+
+<main>
+    <div class="title">
+    <h1>List Patient Booking</h1>
+    </div>
+    <div class="content">
+    <table border="1">
+        <tr>
+            <th>No</th>
+            <th>Name Patient / UserId</th>
+            <th>Name Doctor / DoctorId</th>
+            <th>Diseases / DiseaseId</th>
+            <th>Booking Date</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        <% bookings.forEach((el, i) => { %>
+            <tr>
+            <td><%= i + 1 %></td>
+            <td><%= el.User.username %></td>
+            <td><%= el.Doctor.name %></td>
+            <td><%= el.Disease.name %></td>
+            <td><%= el.formatDate %></td>
+            <td><%= el.status %></td>
+            <td>
+            <% if (el.status !== "Done") { %>
+                <form action="/doctors/booking/<%= el.id %>/switchStatus" method="post">
+                <select name="status" onchange="this.form.submit()"> 
+                    <option selected disabled hidden>Switch Status</option>
+                    <option value="Pending" <%= el.status === "Pending" ? "selected" : "" %>>
+                    Pending
+                    </option>
+                    <option value="Done">Done</option>
+                    <option value="Cancel">Cancel</option>
+                </select>
+                </form>
+            <% } else { %>
+                <b>Status Locked</b>
+            <% } %>
+            </td>
+            </tr>
+        <% }) %>
+    </table>
+    </div>
+</main>
+
+<%- include('footerDoctors') %>

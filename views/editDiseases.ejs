@@ -1,46 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Diseases</title>
-  </head>
-  <body>
-    <main>
-      <div class="title">
-        <h1>Edit Diseases</h1>
-      </div>
-      <form action="/doctors/<%= diseases.id %>/editDiseases" method="post">
-        <div class="column">
-            <label for="">Name Diseases</label>
-            <input type="text" name="name" value="<%= diseases.name %>">
-        </div>
-        <div class="column">
-          <label for="">Description</label>
-          <input type="text" name="description" value="<%= diseases.description %>"/>
-        </div>
-        <div class="column">
-          <label for="">Level</label>
-          <% let level = [1, 2, 3] %>
-          <select name="level" id="" value="level">
-            <% level.forEach(level => { %>
-             <option value="<%= level %>"><%= level %></option>
-            <% }) %>
-          </select>
-        </div>
-        <div class="column">
-          <label for="">Specialist</label>
-          <% let specialization = ["THT", "Mata", "Bedah", "Penyakit dalam","Paru","Otak"] %>
-          <select name="specialization" id="" value="specialization">
-            <% specialization.forEach(specialization => { %>
-             <option value="<%= specialization %>"><%= specialization %></option>
-            <% }) %>
-          </select>
-        </div>
-        <div class="column">
-            <button type="submit">Edit</button>
-        </div>
-      </form>
-    </main>
-  </body>
-</html>
+<%- include('headerDoctors') %>
+
+<main>
+    <div class="title">
+    <h1>Edit Diseases</h1>
+    <% if (errors) { %>
+        <% errors.forEach(err => { %>
+        <p class="error"><%= err %> </p>
+        <% }) %>
+    <% } %>
+    </div>
+    <form action="/doctors/<%= diseases.id %>/editDiseases" method="post">
+    <div class="column">
+        <label for="">Name Diseases</label>
+        <input type="text" name="name" value="<%= diseases.name %>">
+    </div>
+    <div class="column">
+        <label for="">Description</label>
+        <input type="text" name="description" value="<%= diseases.description %>"/>
+    </div>
+    <div class="column">
+        <label for="">Level</label>
+        <% let level = ["Mild", "Moderate", "Severe", "Critical"] %>
+        <select name="level" id="" value="level">
+        <% level.forEach(level => { %>
+            <option value="<%= level %>"><%= level %></option>
+        <% }) %>
+        </select>
+    </div>
+    <div class="column">
+        <label for="">Specialist</label>
+        <% let specialization = ["Internal Medicine", "Heart", "Lungs", "Digestive system","Kidneys","Hormones"] %>
+        <select name="specialization" id="" value="specialization">
+        <% specialization.forEach(specialization => { %>
+            <option value="<%= specialization %>"><%= specialization %></option>
+        <% }) %>
+        </select>
+    </div>
+    <div class="column">
+        <button type="submit">Edit</button>
+    </div>
+    </form>
+</main>
+
+<%- include('footerDoctors') %>

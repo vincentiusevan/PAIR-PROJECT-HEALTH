@@ -1,0 +1,40 @@
+<%- include('headerDoctors') %>
+
+<main>
+    <div class="title">
+    <h1>Symptoms</h1>
+    <% if (notif) { %>
+    <div class="notifDelete">
+        <p ><%= notif %></p>
+    </div>
+    <% } %>
+    </div>
+    <form action="/doctors/symptoms" method="get">
+    <input type="text" name="search">
+    <button type="submit">Search</button>
+    </form>
+    <div class="btnAdd">
+    <a href="/doctors/addSymptoms">Add Symptoms</a>
+    </div>
+    <div class="content">
+    <table border="1">
+        <tr>
+        <th>Name Diseases</th>
+        <th>Description</th>
+        <th>Action</th>
+        </tr>
+        <% symptoms.forEach(el => { %>
+        <tr>
+        <td><%= el.name %></td>
+        <td><%= el.description %></td>
+        <td>
+            <a href="/doctors/<%= el.id %>/editSymptoms">Edit</a>
+            <a href="/doctors/deleteSymptoms/<%= el.id %>">Delete</a>
+        </td>
+        </tr>
+        <% }) %>
+    </table>
+    </div>
+</main>
+
+<%- include('footerDoctors') %>

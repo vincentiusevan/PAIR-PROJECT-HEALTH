@@ -1,0 +1,28 @@
+<%- include('headerDoctors') %>
+<%- include('footerDoctors') %>
+
+<main>
+    <div class="title">
+    <h1>Add Symptoms</h1>
+    <% if (errors) { %>
+        <% errors.forEach(err => { %>
+        <p class="error"><%= err %> </p>
+        <% }) %>
+    <% } %>
+    </div>
+    <form action="/doctors/addSymptoms" method="post">
+    <div class="column">
+        <label for="">Name Symptoms</label>
+        <input type="text" name="name">
+    </div>
+    <div class="column">
+        <label for="">Description</label>
+        <input type="text" name="description" />
+    </div>
+    <div class="column">
+        <button type="submit">Add</button>
+    </div>
+    </form>
+</main>
+
+<%- include('footerDoctors') %>

@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Symptom extends Model {
     /**
@@ -12,16 +10,41 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Symptom.belongsToMany(models.Booking, {
         through: models.BookingSymptom,
-        foreignKey: "SymptomId"
+        foreignKey: "SymptomId",
       });
     }
   }
-  Symptom.init({
-    name: DataTypes.STRING,
-    description: DataTypes.TEXT
-  }, {
-    sequelize,
-    modelName: 'Symptom',
-  });
+  Symptom.init(
+    {
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Name Symptoms required",
+          },
+          notEmpty: {
+            msg: "Name Symptoms cannot be empty!",
+          },
+        },
+      },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Description Symptoms required",
+          },
+          notEmpty: {
+            msg: "Description Symptoms cannot be empty!",
+          },
+        },
+      },
+    },
+    {
+      sequelize,
+      modelName: "Symptom",
+    },
+  );
   return Symptom;
 };
