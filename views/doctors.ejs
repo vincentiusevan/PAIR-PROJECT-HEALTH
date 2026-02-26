@@ -22,12 +22,17 @@
   </style>
   <body>
     <header>
-        <a href="">Add Disease</a>
+      <a href="/doctors">Doctors</a>
+      <a href="/doctors/diseases">Diseases</a>
+      <a href="">Symptoms</a>
     </header>
     <main class="doctors">
       <div class="title">
         <h1>Doctors Page</h1>
       </div>
+      <div class="btnAdd">
+          <a href="/doctors/addDoctors">Add doctors</a>
+        </div>
       <div class="content">
         <% doctors.forEach(el => { %>
              <div class="box">
@@ -36,10 +41,12 @@
                 </div>
                 <div class="desc">
                     <h4><%= el.name %></h4>
-                    <p><%= el.phoneNumber %></p>
                     <p><%= el.specialization %></p>
+                    <p><%= el.degree %></p>
                     <div class="btn">
-                        <a href="">Detail</a>
+                        <a href="">Patients</a>
+                        <a href="/doctors/<%= el.id %>/editDoctors">Edit</a>
+                        <a href="/doctors/deleteDoctors/<%= el.id %>">Delete</a>
                     </div>
                 </div>
              </div>
