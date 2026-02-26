@@ -12,14 +12,14 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Booking.belongsTo(models.User, { foreignKey: "UserId" });
 
-  Booking.belongsTo(models.Doctor, { foreignKey: "DoctorId" });
+      Booking.belongsTo(models.Doctor, { foreignKey: "DoctorId" });
 
-  Booking.belongsTo(models.Disease, { foreignKey: "DiseaseId" });
+      Booking.belongsTo(models.Disease, { foreignKey: "DiseaseId" });
 
-  Booking.belongsToMany(models.Symptom, {
-    through: models.BookingSymptom,
-    foreignKey: "BookingId"
-  });
+      Booking.belongsToMany(models.Symptom, {
+        through: models.BookingSymptom,
+        foreignKey: "BookingId"
+      });
     }
   }
   Booking.init({

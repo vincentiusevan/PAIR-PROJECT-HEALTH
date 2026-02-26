@@ -1,7 +1,5 @@
-const { where } = require('sequelize')
 const { User } = require('../models')
 const bcrypt = require('bcryptjs')
-const session = require('express-session')
 
 class LoginController {
     static async showLogin(req, res) {
@@ -16,10 +14,15 @@ class LoginController {
         try {
             const { email, password } = req.body
             const user = await User.findOne({ where: { email } })
-            const isValid = bcrypt.compareSync(password, user.password
 
-            )
-            if (!user || !isValid) {
+
+            if (!user) {
+                return res.send('Invalid email/password')
+            }
+
+            const isValid = bcrypt.compareSync(password, user.password)
+
+            if (!isValid) {
                 return res.send('Invalid email/password')
             }
 
