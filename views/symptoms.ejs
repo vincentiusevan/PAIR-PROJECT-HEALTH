@@ -1,40 +1,46 @@
 <%- include('headerDoctors') %>
 
-<main>
-    <div class="title">
-    <h1>Symptoms</h1>
-    <% if (notif) { %>
-    <div class="notifDelete">
-        <p ><%= notif %></p>
-    </div>
-    <% } %>
+<main class="symptoms">
+   <div class="container">
+     <div class="title">
+        <h1>Symptoms</h1>
+        <% if (notif) { %>
+        <div class="notifDelete">
+            <p ><%= notif %></p>
+        </div>
+        <% } %>
     </div>
     <form action="/doctors/symptoms" method="get">
-    <input type="text" name="search">
-    <button type="submit">Search</button>
+        <div class="search">
+            <input class="search" type="text" name="search">
+            <button class="btn" type="submit">Search</button>
+        </div>
     </form>
     <div class="btnAdd">
-    <a href="/doctors/addSymptoms">Add Symptoms</a>
+        <a class="btn" href="/doctors/addSymptoms">Add Symptoms</a>
     </div>
     <div class="content">
-    <table border="1">
-        <tr>
-        <th>Name Diseases</th>
-        <th>Description</th>
-        <th>Action</th>
-        </tr>
-        <% symptoms.forEach(el => { %>
-        <tr>
-        <td><%= el.name %></td>
-        <td><%= el.description %></td>
-        <td>
-            <a href="/doctors/<%= el.id %>/editSymptoms">Edit</a>
-            <a href="/doctors/deleteSymptoms/<%= el.id %>">Delete</a>
-        </td>
-        </tr>
-        <% }) %>
-    </table>
+        <table>
+            <tr>
+                <th>No</th>
+                <th>Name Diseases</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+            <% symptoms.forEach((el, i) => { %>
+            <tr class="trTd">
+                <td><%= i + 1 %></td>
+                <td><%= el.name %></td>
+                <td><%= el.description %></td>
+                <td>
+                    <a class="btn" href="/doctors/<%= el.id %>/editSymptoms">Edit</a>
+                    <a class="btnDelete" href="/doctors/deleteSymptoms/<%= el.id %>">Delete</a>
+                </td>
+            </tr>
+            <% }) %>
+        </table>
     </div>
+   </div>
 </main>
 
 <%- include('footerDoctors') %>

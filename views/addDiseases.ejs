@@ -5,9 +5,12 @@
         <div class="title">
             <h1>Add Diseases</h1>
             <% if (errors) { %>
-                <% errors.forEach(err => { %>
-                <p class="error"><%= err %> </p>
-                <% }) %>
+                <div class="errors">
+                    <h3>WARNING !!</h3>
+                    <% errors.forEach(err => { %>
+                    <p class="error"><%= err %> </p>
+                    <% }) %>
+                </div>
             <% } %>
         </div>
         <form class="content" action="/doctors/addDiseases" method="post">
@@ -49,6 +52,9 @@
         </form>
     </div>
 </main>
-
-<%- include('footerDoctors') %>
+<footer class="footerDoctorsPage">
+  <div class="container">
+    <p>Copyright @Indraprasta and Evan 2026</p>
+  </div>
+</footer>
 
