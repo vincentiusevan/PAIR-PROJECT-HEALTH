@@ -1,46 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Doctors</title>
-  </head>
-  <body>
-    <main>
-      <div class="title">
-        <h1>Add Doctors</h1>
-      </div>
-      <form action="/doctors/addDoctors" method="post">
-        <div class="column">
-            <label for="">Image URL</label>
-            <input type="text" name="imageUrl">
+<%- include('headerDoctors') %>
+
+<main class="addDoctors">
+    <div class="container">
+        <div class="title">
+            <h1>Add Doctors</h1>
+            <div class="errors">
+                <% if (errors) { %>
+                    <% errors.forEach(err => { %>
+                    <p class="error"><%= err %> </p>
+                    <% }) %>
+                <% } %>
+            </div>
         </div>
-        <div class="column">
-          <label for="">Name Doctor</label>
-          <input type="text" name="name" />
-        </div>
-        <div class="column">
-          <label for="">Doctor specialist</label>
-          <% let specialization = ["THT", "Mata", "Bedah", "Penyakit dalam","Paru","Otak"] %>
-          <select name="specialization" id="">
-            <% specialization.forEach(specialization => { %>
-             <option value="<%= specialization %>"><%= specialization %></option>
-            <% }) %>
-          </select>
-        </div>
-        <div class="column">
-          <label for="">Degree</label>
-          <% let degree = ["S1", "S2", "S3"] %>
-          <select name="degree" id="">
-            <% degree.forEach(degree => { %>
-             <option value="<%= degree %>"><%= degree %></option>
-            <% }) %>
-          </select>
-        </div>
-        <div class="column">
-            <button type="submit">Add</button>
-        </div>
-      </form>
-    </main>
-  </body>
-</html>
+        <form class="content" action="/doctors/addDoctors" method="post">
+            <div class="column">
+                <label for="">Image URL</label>
+                <input type="text" name="imageUrl">
+            </div>
+            <div class="column">
+                <label for="">Name Doctor</label>
+                <input type="text" name="name" />
+            </div>
+            <div class="column">
+                <label for="">Doctor specialist</label>
+                <% let specialization = ["Internal Medicine Specialist", "Heart", "Lungs", "Digestive system","Kidneys","Hormones","Sunat"] %>
+                <select name="specialization" id="">
+                <option value="" selected disabled hidden>Choose</option>
+                <% specialization.forEach(specialization => { %>
+                    <option value="<%= specialization %>"><%= specialization %></option>
+                <% }) %>
+                </select>
+            </div>
+            <div class="column">
+                <label for="">Degree</label>
+                <% let degree = ["S1", "S2", "S3"] %>
+                <select name="degree" id="">
+                <option value="" selected disabled hidden>Choose</option>
+                <% degree.forEach(degree => { %>
+                    <option value="<%= degree %>"><%= degree %></option>
+                <% }) %>
+                </select>
+            </div>
+            <div class="column">
+                <button class="btn" type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<%- include('footerDoctors') %>

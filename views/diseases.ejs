@@ -1,15 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page Diseases</title>
-  </head>
-  <body>
+<%- include('headerDoctors') %>
+
     <main>
       <div class="title">
         <h1>Diseases</h1>
+        <% if (notif) { %>
+        <div class="notifDelete">
+          <p ><%= notif %></p>
+        </div>
+        <% } %>
       </div>
+      <form action="/doctors/diseases" method="get">
+        <input type="text" name="search">
+        <button type="submit">Search</button>
+      </form>
       <div class="btnAdd">
         <a href="/doctors/addDiseases">Add Diseases</a>
       </div>
@@ -39,5 +42,5 @@
         </table>
       </div>
     </main>
-  </body>
-</html>
+
+<%- include('footerDoctors') %>

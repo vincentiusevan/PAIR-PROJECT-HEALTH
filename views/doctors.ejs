@@ -1,57 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Doctors</title>
-  </head>
-  <style>
-    img {
-        width: 400px;
-    }
-    .content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
+<%- include('headerDoctors') %>
 
-    .box {
-        padding: 10px;
-        border: 1px solid black;
-    }
-  </style>
-  <body>
-    <header>
-      <a href="/doctors">Doctors</a>
-      <a href="/doctors/diseases">Diseases</a>
-      <a href="">Symptoms</a>
-    </header>
-    <main class="doctors">
-      <div class="title">
-        <h1>Doctors Page</h1>
-      </div>
-      <div class="btnAdd">
-          <a href="/doctors/addDoctors">Add doctors</a>
-        </div>
-      <div class="content">
-        <% doctors.forEach(el => { %>
-             <div class="box">
-                <div class="images">
-                    <img src="<%= el.imageUrl %>" alt="">
-                </div>
-                <div class="desc">
-                    <h4><%= el.name %></h4>
-                    <p><%= el.specialization %></p>
-                    <p><%= el.degree %></p>
-                    <div class="btn">
-                        <a href="">Patients</a>
-                        <a href="/doctors/<%= el.id %>/editDoctors">Edit</a>
-                        <a href="/doctors/deleteDoctors/<%= el.id %>">Delete</a>
-                    </div>
-                </div>
-             </div>
-        <% }) %>
-      </div>
-    </main>
-  </body>
-</html>
+<main class="doctors">
+  <div class="container">
+    <div class="title">
+    <h1>Doctors Page</h1>
+    <% if (notif) { %>
+    <div class="notifDelete">
+      <p ><%= notif %></p>
+    </div>
+    <% } %>
+    </div>
+    <form class="search" action="/doctors" method="get">
+      <input type="text" name="search">
+      <button class="btn" type="submit">Search</button>
+    </form>
+    <div class="btnAdd">
+        <a class="btn" href="/doctors/addDoctors">Add doctors</a>
+    </div>
+    <div class="content">
+      <% doctors.forEach(el => { %>
+            <div class="box">
+              <div class="images">
+                  <img src="<%= el.imageUrl %>" alt="">
+              </div>
+              <div class="desc">
+                  <h3><%= el.name %></h3>
+                  <p>Specialization <%= el.specialization %></p>
+                  <p>Degree <%= el.degree %></p>
+                  <div class="btnWrap">
+                      <a class="btn" href="/doctors/<%= el.id %>/listPatientBookings">Patients</a>
+                      <a class="btn" href="/doctors/<%= el.id %>/editDoctors">Edit</a>
+                      <a class="btn" href="/doctors/deleteDoctors/<%= el.id %>">Delete</a>
+                  </div>
+              </div>
+            </div>
+      <% }) %>
+    </div>
+  </div>
+</main>
+<footer class="footerDoctorsPage">
+  <div class="container">
+    <p>Copyright @Indraprasta and Evan 2026</p>
+  </div>
+</footer>
