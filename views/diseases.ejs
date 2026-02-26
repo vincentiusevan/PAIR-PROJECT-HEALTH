@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Diseases</title>
+  </head>
+  <body>
+    <main>
+      <div class="title">
+        <h1>Diseases</h1>
+      </div>
+      <div class="btnAdd">
+        <a href="/doctors/addDiseases">Add Diseases</a>
+      </div>
+      <div class="content">
+        <table border="1">
+          <tr>
+            <th>Name Diseases</th>
+            <th>Description</th>
+            <th>Level</th>
+            <th>Medicine</th>
+            <th>Specialization</th>
+            <th>Action</th>
+          </tr>
+          <% diseases.forEach(el => { %>
+           <tr>
+            <td><%= el.name %></td>
+            <td><%= el.description %></td>
+            <td><%= el.level %></td>
+            <td><%= el.medicine %></td>
+            <td><%= el.specialization %></td>
+            <td>
+                <a href="/doctors/<%= el.id %>/editDiseases">Edit</a>
+                <a href="/doctors/deleteDiseases/<%= el.id %>">Delete</a>
+            </td>
+           </tr>
+          <% }) %>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>

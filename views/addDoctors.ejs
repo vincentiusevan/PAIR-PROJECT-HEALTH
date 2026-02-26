@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Doctors</title>
+  </head>
+  <body>
+    <main>
+      <div class="title">
+        <h1>Add Doctors</h1>
+      </div>
+      <form action="/doctors/addDoctors" method="post">
+        <div class="column">
+            <label for="">Image URL</label>
+            <input type="text" name="imageUrl">
+        </div>
+        <div class="column">
+          <label for="">Name Doctor</label>
+          <input type="text" name="name" />
+        </div>
+        <div class="column">
+          <label for="">Doctor specialist</label>
+          <% let specialization = ["THT", "Mata", "Bedah", "Penyakit dalam","Paru","Otak"] %>
+          <select name="specialization" id="">
+            <% specialization.forEach(specialization => { %>
+             <option value="<%= specialization %>"><%= specialization %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="column">
+          <label for="">Degree</label>
+          <% let degree = ["S1", "S2", "S3"] %>
+          <select name="degree" id="">
+            <% degree.forEach(degree => { %>
+             <option value="<%= degree %>"><%= degree %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="column">
+            <button type="submit">Add</button>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>
