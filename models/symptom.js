@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
         through: models.BookingSymptom,
         foreignKey: "SymptomId",
       });
+      Symptom.belongsToMany(models.Disease, {
+        through: 'DiseaseSymptoms'
+      })  
     }
   }
   Symptom.init(

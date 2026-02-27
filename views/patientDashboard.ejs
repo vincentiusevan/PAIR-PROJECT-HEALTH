@@ -1,0 +1,311 @@
+<%- include('headerPatients') %>
+
+    <main class="patientDashboard">
+        <div class="container">
+
+            <!-- WELCOME BANNER -->
+            <div class="welcome-banner">
+                <div>
+                    <h2>Welcome back, <%= user.username %> 👋</h2>
+                    <p>Here's your health overview for today.</p>
+                </div>
+                <a href="/patients/book" class="btn-book">+ New Appointment</a>
+            </div>
+
+            <!-- QUICK ACTION -->
+            <h3 class="section-title">Quick Actions</h3>
+            <div class="card-container">
+                <div class="card card-action">
+                    <div class="card-icon">📅</div>
+                    <h3>Make Appointment</h3>
+                    <p>Schedule a consultation with a doctor based on your symptoms.</p>
+                    <a href="/patients/book" class="button">Book Now</a>
+                </div>
+                <div class="card card-action">
+                    <div class="card-icon">📋</div>
+                    <h3>My Bookings</h3>
+                    <p>Check your appointment history and status updates.</p>
+                    <a href="/patients/bookings" class="button">View Bookings</a>
+                </div>
+                <div class="card card-action">
+                    <div class="card-icon">👨‍⚕️</div>
+                    <h3>Our Doctors</h3>
+                    <p>Browse available specialists and their expertise.</p>
+                    <a href="/patients/doctors" class="button">View Doctors</a>
+                </div>
+            </div>
+
+            <!-- SUMMARY -->
+            <h3 class="section-title">Booking Summary</h3>
+            <div class="card-container">
+                <div class="card card-stat card-stat-total">
+                    <div class="stat-number">
+                        <%= totalBookings %>
+                    </div>
+                    <div class="stat-label">Total Bookings</div>
+                </div>
+                <div class="card card-stat card-stat-pending">
+                    <div class="stat-number">
+                        <%= pending %>
+                    </div>
+                    <div class="stat-label">Pending</div>
+                </div>
+                <div class="card card-stat card-stat-confirmed">
+                    <div class="stat-number">
+                        <%= confirmed %>
+                    </div>
+                    <div class="stat-label">Confirmed</div>
+                </div>
+            </div>
+
+            <!-- ARTICLES -->
+            <h3 class="section-title">Health Articles</h3>
+            <div class="article-container">
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=400" alt="Flu">
+                    <div class="article-content">
+                        <span class="article-tag">Virus</span>
+                        <h4>Understanding Flu</h4>
+                        <p>Learn about flu symptoms and prevention tips.</p>
+                        <a href="https://www.alodokter.com/flu" target="_blank">Read More →</a>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400" alt="Heart">
+                    <div class="article-content">
+                        <span class="article-tag">Cardiology</span>
+                        <h4>Heart Health Tips</h4>
+                        <p>How to maintain a healthy heart lifestyle.</p>
+                        <a href="https://www.alodokter.com/jantung" target="_blank">Read More →</a>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=400" alt="Healthy">
+                    <div class="article-content">
+                        <span class="article-tag">Lifestyle</span>
+                        <h4>Healthy Living Guide</h4>
+                        <p>Daily habits to boost your immune system.</p>
+                        <a href="https://www.alodokter.com/health" target="_blank">Read More →</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <style>
+        .patientDashboard {
+            padding: 40px 0;
+            background: #f0f9ff;
+            min-height: calc(100vh - 130px);
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #16bbf7, #0e8ab5);
+            color: white;
+            padding: 30px 35px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(22, 187, 247, 0.3);
+        }
+
+        .welcome-banner h2 {
+            margin: 0 0 6px 0;
+            font-size: 1.6rem;
+        }
+
+        .welcome-banner p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .btn-book {
+            background: white;
+            color: #16bbf7;
+            padding: 10px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .btn-book:hover {
+            background: #e0f5ff;
+        }
+
+        .section-title {
+            margin: 30px 0 15px 0;
+            font-size: 1rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 4px solid #16bbf7;
+            padding-left: 12px;
+        }
+
+        .card-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            flex: 1;
+            min-width: 200px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-action {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .card-action h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .card-action p {
+            margin: 0;
+            color: #777;
+            font-size: 0.9rem;
+            flex: 1;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 9px 18px;
+            background: #16bbf7;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: 0.3s;
+            text-align: center;
+            margin-top: 6px;
+        }
+
+        .button:hover {
+            background: #0e8ab5;
+        }
+
+        .card-stat {
+            padding: 30px 25px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: bold;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-stat-total .stat-number {
+            color: #16bbf7;
+        }
+
+        .card-stat-pending .stat-number {
+            color: #f59e0b;
+        }
+
+        .card-stat-confirmed .stat-number {
+            color: #10b981;
+        }
+
+        .article-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .article-card {
+            background: white;
+            flex: 1;
+            min-width: 220px;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .article-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .article-content {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .article-tag {
+            display: inline-block;
+            background: #e0f5ff;
+            color: #16bbf7;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 20px;
+            width: fit-content;
+        }
+
+        .article-content h4 {
+            margin: 0;
+            color: #333;
+        }
+
+        .article-content p {
+            margin: 0;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .article-content a {
+            color: #16bbf7;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <%- include('footerDoctors') %>

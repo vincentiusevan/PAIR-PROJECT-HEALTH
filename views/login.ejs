@@ -4,17 +4,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Login - HaloCoy</title>
+    <style>
+        body { background: #f0f9ff; }
+        .login-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .login-box h2 {
+            text-align: center;
+            color: #16bbf7;
+            margin-bottom: 30px;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .login-box button {
+            width: 100%;
+            padding: 12px;
+            background: #16bbf7;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .login-box button:hover { background: #0e8ab5; }
+        .register-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .register-link a {
+            color: #16bbf7;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .error-box {
+            background: #ef073f;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body>
-    <form action="/login" method="post">
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-        <a href="/register">
-            <button type="button">Register</button>
-        </a>
-    </form>
+    <div class="login-wrapper">
+        <div class="login-box">
+            <h2>🏥 HaloCoy</h2>
+            <% if (error) { %>
+                <div class="error-box">
+                    <%= error %>
+                </div>
+            <% } %>
+            <form action="/login" method="post">
+                <input type="email" name="email" placeholder="Email">
+                <input type="password" name="password" placeholder="Password">
+                <button type="submit">Login</button>
+            </form>
+            <div class="register-link">
+                <p>Belum punya akun? <a href="/register">Register di sini</a></p>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

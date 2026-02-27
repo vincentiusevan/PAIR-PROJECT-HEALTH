@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 
     // Instance method
     changeStatus(newStatus) {
-      if (this.status === "Done") {
+      if (this.status === "done") {
         throw new Error("Status is done, cannot be changed");
       }
 
@@ -36,11 +36,36 @@ module.exports = (sequelize, DataTypes) => {
   }
   Booking.init(
     {
-      bookingDate: DataTypes.DATE,
+      bookingDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: 'Booking date is required'
+          }
+        }
+      },
       status: DataTypes.STRING,
-      UserId: DataTypes.INTEGER,
+      UserId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: 'User is required'
+          }
+        }
+      },
       DoctorId: DataTypes.INTEGER,
-      DiseaseId: DataTypes.INTEGER,
+
+      DiseaseId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: 'Please select at least one symptom'
+          }
+        }
+      },
     },
     {
       sequelize,
@@ -50,7 +75,7 @@ module.exports = (sequelize, DataTypes) => {
 
   // agar setap booking baru statusny pending
   Booking.addHook("beforeCreate", (booking) => {
-    booking.status = "Pending";
+    booking.status = "pending";
   });
 
   return Booking;

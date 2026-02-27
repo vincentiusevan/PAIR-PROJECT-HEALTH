@@ -1,32 +1,37 @@
 <%- include('headerDoctors') %>
 
-<main>
-    <div class="container">
-        <div class="title">
-            <h1>Edit Symptoms</h1>
-             <% if (errors) { %>
-                <div class="errors">
-                    <h3>WARNING !!</h3>
-                    <% errors.forEach(err => { %>
-                    <p class="error"><%= err %> </p>
-                    <% }) %>
+    <main>
+        <div class="container">
+            <div class="title">
+                <h1>Edit Symptoms</h1>
+                <% if (errors) { %>
+                    <div class="errors">
+                        <h3>WARNING !!</h3>
+                        <% errors.forEach(err=> { %>
+                            <p class="error">
+                                <%= err %>
+                            </p>
+                            <% }) %>
+                    </div>
+                    <% } %>
+            </div>
+            <form class="content" action="/doctors/<%= symptoms.id %>/editSymptoms" method="post">
+                <div class="column">
+                    <label for="">Name Symptoms</label>
+                    <input type="text" name="name" value="<%= symptoms.name %>">
                 </div>
-            <% } %>
+                <div class="column">
+                    <label for="">Description</label>
+                    <input type="text" name="description" value="<%= symptoms.description %>" />
+                </div>
+                <div class="column">
+                    <button class="btn" type="submit">Edit</button>
+                </div>
+            </form>
         </div>
-        <form class="content" action="/doctors/<%= symptoms.id %>/editSymptoms" method="post">
-            <div class="column">
-                <label for="">Name Symptoms</label>
-                <input type="text" name="name" value="<%= symptoms.name %>">
-            </div>
-            <div class="column">
-                <label for="">Description</label>
-                <input type="text" name="description" value="<%= symptoms.description %>"/>
-            </div>
-            <div class="column">
-                <button class="btn" type="submit">Edit</button>
-            </div>
-        </form>
-    </div>
-</main>
-
-<%- include('footerDoctors') %>
+    </main>
+    <footer class="footerSymptom">
+        <div class="container">
+            <p>Copyright @Indraprasta and Evan 2026</p>
+        </div>
+    </footer>

@@ -1,0 +1,62 @@
+<%- include('headerPatients') %>
+
+    <main class="listPatient">
+        <div class="container">
+            <div class="title">
+                <h1>My Bookings</h1>
+            </div>
+
+            <% if (bookings.length===0) { %>
+                <div class="content">
+                    <p>You don't have any bookings yet.</p>
+                    <a class="btn" href="/patients/book">Book Appointment</a>
+                </div>
+                <% } else { %>
+                    <div class="content">
+                        <table>
+                            <tr>
+                                <th>No</th>
+                                <th>Doctor</th>
+                                <th>Disease</th>
+                                <th>Booking Date</th>
+                                <th>Status</th>
+                                <th>QR Code</th>
+                            </tr>
+                            <% bookings.forEach((el, i)=> { %>
+                                <tr class="trTd">
+                                    <td>
+                                        <%= i + 1 %>
+                                    </td>
+                                    <td>
+                                        <%= el.Doctor ? el.Doctor.name : '-' %>
+                                    </td>
+                                    <td>
+                                        <%= el.Disease ? el.Disease.name : '-' %>
+                                    </td>
+                                    <td>
+                                        <%= el.bookingDate ? new Date(el.bookingDate).toLocaleDateString('en-US', {
+                                            month: 'short' , day: '2-digit' , year: 'numeric' }) : '-' %>
+                                    </td>
+                                    <td>
+                                        <% if (el.status==="pending" ) { %>
+                                            <span style="color: orange; font-weight: bold;">Pending</span>
+                                            <% } else if (el.status==="confirmed" ) { %>
+                                                <span style="color: green; font-weight: bold;">Confirmed</span>
+                                                <% } else if (el.status==="done" ) { %>
+                                                    <span class="statusLocked">Done</span>
+                                                    <% } else { %>
+                                                        <%= el.status %>
+                                                            <% } %>
+                                    </td>
+                                    <td>
+                                        <img src="<%= el.qrCode %>" width="100" height="100" title="Booking QR">
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </table>
+                    </div>
+                    <% } %>
+        </div>
+    </main>
+
+    <%- include('footerDoctors') %>
