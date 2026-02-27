@@ -7,6 +7,7 @@ const {
   BookingSymptom,
 } = require("../models");
 const { Op } = require("sequelize");
+const { capitalizeFirst } = require('../helpers/formatHelper');
 
 class DoctorsController {
   static async doctors(req, res) {
@@ -34,6 +35,12 @@ class DoctorsController {
     try {
       const { id } = req.params;
       const { status } = req.body;
+
+      const allowedStatus = ["pending", "confirmed", "done"];
+
+      if (!allowedStatus.includes(status)) {
+        return res.send("Invalid status");
+      }
 
       const booking = await Booking.findByPk(id);
 
@@ -74,7 +81,7 @@ class DoctorsController {
   static async postAddDoctors(req, res) {
     try {
       const { name, specialization, degree, imageUrl } = req.body;
-      await Doctor.create({ name, specialization, degree, imageUrl });
+      await Doctor.create({ name: capitalizeFirst(name), specialization, degree, imageUrl });
       res.redirect("/doctors");
     } catch (error) {
       if (error.name === "SequelizeValidationError") {
@@ -86,16 +93,16 @@ class DoctorsController {
     }
   }
 
-  static async getDeleteDoctors(req, res) {
-    try {
-      const { id } = req.params;
+  static getDeleteDoctors(req, res) {
+    const { id } = req.params;
 
-      const doctors = await Doctor.deleteNoPatients(id);
-
-      res.redirect(`/doctors?notif=Doctors ${doctors} removed`);
-    } catch (error) {
-      res.redirect(`/doctors?notif=${error.message}`);
-    }
+    Doctor.deleteNoPatients(id)
+      .then((name) => {
+        res.redirect(`/doctors?notif=Doctor ${name} removed`);
+      })
+      .catch((error) => {
+        res.redirect(`/doctors?notif=${error.message}`);
+      });
   }
 
   static async getEditDoctors(req, res) {
@@ -115,7 +122,7 @@ class DoctorsController {
     try {
       const { imageUrl, name, specialization, degree } = req.body;
       await Doctor.update(
-        { imageUrl, name, specialization, degree },
+        { imageUrl, name: capitalizeFirst(name), specialization, degree },
         { where: { id } },
       );
       res.redirect("/doctors");

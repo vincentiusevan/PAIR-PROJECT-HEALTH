@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>HaloCoy - Your Health Companion</title>
+    <style>
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #16bbf7, #0e8ab5);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn-white {
+            background: white;
+            color: #16bbf7;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-white:hover {
+            background: #f0f0f0;
+        }
+
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #16bbf7;
+        }
+
+        .features {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            padding: 60px 40px;
+            flex-wrap: wrap;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            width: 250px;
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-left">
+            <h2>HaloCoy</h2>
+        </div>
+        <div class="navbar">
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>🏥 HaloCoy</h1>
+        <p>Your smart health companion. Book appointments, track symptoms, and connect with doctors — all in one place.
+        </p>
+        <div class="hero-buttons">
+            <a href="/register" class="btn-white">Get Started</a>
+            <a href="/login" class="btn-outline">Login</a>
+        </div>
+    </div>
+
+    <div class="features">
+        <div class="feature-card">
+            <div class="icon">🩺</div>
+            <h3>Find Doctors</h3>
+            <p>Browse specialists and find the right doctor for your needs.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">📅</div>
+            <h3>Book Appointments</h3>
+            <p>Schedule consultations easily based on your symptoms.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">💊</div>
+            <h3>Track Diseases</h3>
+            <p>Learn about diseases, symptoms, and recommended treatments.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Copyright @Indraprasta and Evan 2026</p>
+    </footer>
+</body>
+
+</html>

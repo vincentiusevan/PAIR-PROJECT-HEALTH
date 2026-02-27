@@ -1,46 +1,54 @@
 <%- include('headerDoctors') %>
 
-<main class="symptoms">
-   <div class="container">
-     <div class="title">
-        <h1>Symptoms</h1>
-        <% if (notif) { %>
-        <div class="notifDelete">
-            <p ><%= notif %></p>
+    <main class="symptoms">
+        <div class="container">
+            <div class="title">
+                <h1>Symptoms</h1>
+                <% if (notif) { %>
+                    <div class="notifDelete">
+                        <p>
+                            <%= notif %>
+                        </p>
+                    </div>
+                    <% } %>
+            </div>
+            <form action="/doctors/symptoms" method="get">
+                <div class="search">
+                    <input class="search" type="text" name="search">
+                    <button class="btn" type="submit">Search</button>
+                </div>
+            </form>
+            <div class="btnAdd">
+                <a class="btn" href="/doctors/addSymptoms">Add Symptoms</a>
+            </div>
+            <div class="content">
+                <table>
+                    <tr>
+                        <th>No</th>
+                        <th>Name Diseases</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                    <% symptoms.forEach((el, i)=> { %>
+                        <tr class="trTd">
+                            <td>
+                                <%= i + 1 %>
+                            </td>
+                            <td>
+                                <%= el.name %>
+                            </td>
+                            <td>
+                                <%= el.description %>
+                            </td>
+                            <td>
+                                <a class="btn" href="/doctors/<%= el.id %>/editSymptoms">Edit</a>
+                                <a class="btnDelete" href="/doctors/deleteSymptoms/<%= el.id %>">Delete</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </table>
+            </div>
         </div>
-        <% } %>
-    </div>
-    <form action="/doctors/symptoms" method="get">
-        <div class="search">
-            <input class="search" type="text" name="search">
-            <button class="btn" type="submit">Search</button>
-        </div>
-    </form>
-    <div class="btnAdd">
-        <a class="btn" href="/doctors/addSymptoms">Add Symptoms</a>
-    </div>
-    <div class="content">
-        <table>
-            <tr>
-                <th>No</th>
-                <th>Name Diseases</th>
-                <th>Description</th>
-                <th>Action</th>
-            </tr>
-            <% symptoms.forEach((el, i) => { %>
-            <tr class="trTd">
-                <td><%= i + 1 %></td>
-                <td><%= el.name %></td>
-                <td><%= el.description %></td>
-                <td>
-                    <a class="btn" href="/doctors/<%= el.id %>/editSymptoms">Edit</a>
-                    <a class="btnDelete" href="/doctors/deleteSymptoms/<%= el.id %>">Delete</a>
-                </td>
-            </tr>
-            <% }) %>
-        </table>
-    </div>
-   </div>
-</main>
+    </main>
 
-<%- include('footerDoctors') %>
+    <%- include('footerDoctors') %>

@@ -1,46 +1,52 @@
 <%- include('headerDoctors') %>
 
-<main class="doctors">
-  <div class="container">
-    <div class="title">
-      <h1>Doctors Page</h1>
-      <% if (notif) { %>
-      <div class="notifDelete">
-        <h3>WARNING !!</h1>
-        <p ><%= notif %></p>
+  <main class="doctors">
+    <div class="container">
+      <div class="title">
+        <h1>Doctors Page</h1>
+        <% if (notif) { %>
+          <div class="notifDelete">
+            <h3>WARNING !!</h1>
+              <p>
+                <%= notif %>
+              </p>
+          </div>
+          <% } %>
       </div>
-       <% } %>
-    </div>
-    <form class="search" action="/doctors" method="get">
-      <input type="text" name="search">
-      <button class="btn" type="submit">Search</button>
-    </form>
-    <div class="btnAdd">
+      <form class="search" action="/doctors" method="get">
+        <input type="text" name="search">
+        <button class="btn" type="submit">Search</button>
+      </form>
+      <div class="btnAdd">
         <a class="btn" href="/doctors/addDoctors">Add doctors</a>
-    </div>
-    <div class="content">
-      <% doctors.forEach(el => { %>
-            <div class="box">
-              <div class="images">
-                  <img src="<%= el.imageUrl %>" alt="">
-              </div>
-              <div class="desc">
-                  <h3><%= el.name %></h3>
-                  <p>Specialization <%= el.specialization %></p>
-                  <p>Degree <%= el.degree %></p>
-                  <div class="btnWrap">
-                      <a class="btnDetail" href="/doctors/<%= el.id %>/listPatientBookings">Patients</a>
-                      <a class="btn" href="/doctors/<%= el.id %>/editDoctors">Edit</a>
-                      <a class="btnDelete" href="/doctors/deleteDoctors/<%= el.id %>">Delete</a>
-                  </div>
+      </div>
+      <div class="content">
+        <% doctors.forEach(el=> { %>
+          <div class="box">
+            <div class="images">
+              <img src="<%= el.imageUrl %>" alt="">
+            </div>
+            <div class="desc">
+              <h3>
+                <%= el.name %>
+              </h3>
+              <p>Specialization <%= el.specialization %>
+              </p>
+              <p>Degree <%= el.degree %>
+              </p>
+              <div class="btnWrap">
+                <a class="btnDetail" href="/doctors/<%= el.id %>/listPatientBookings">Patients</a>
+                <a class="btn" href="/doctors/<%= el.id %>/editDoctors">Edit</a>
+                <a class="btnDelete" href="/doctors/deleteDoctors/<%= el.id %>">Delete</a>
               </div>
             </div>
-      <% }) %>
+          </div>
+          <% }) %>
+      </div>
     </div>
-  </div>
-</main>
-<footer class="footerDoctorsPage">
-  <div class="container">
-    <p>Copyright @Indraprasta and Evan 2026</p>
-  </div>
-</footer>
+  </main>
+  <footer class="footerDoctorsPage">
+    <div class="container">
+      <p>Copyright @Indraprasta and Evan 2026</p>
+    </div>
+  </footer>

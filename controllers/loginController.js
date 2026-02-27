@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 class LoginController {
     static async showLogin(req, res) {
         try {
-            res.render('login')
+            res.render('login', { error: null })
         } catch (error) {
             res.send(error)
         }
@@ -15,15 +15,14 @@ class LoginController {
             const { email, password } = req.body
             const user = await User.findOne({ where: { email } })
 
-
             if (!user) {
-                return res.send('Invalid email/password')
+                return res.render('login', { error: 'Invalid email/password' })
             }
 
             const isValid = bcrypt.compareSync(password, user.password)
 
             if (!isValid) {
-                return res.send('Invalid email/password')
+                return res.render('login', { error: 'Invalid email/password' })
             }
 
             req.session.userId = user.id
@@ -35,15 +34,14 @@ class LoginController {
                 return res.redirect('/patients')
             }
         } catch (error) {
-            console.log(error);
-
+            console.log(error)
             res.send(error)
         }
     }
 
     static async showRegister(req, res) {
         try {
-            res.render('register')
+            res.render('register', { error: null })
         } catch (error) {
             res.send(error)
         }
@@ -55,6 +53,14 @@ class LoginController {
             await User.create({ username, email, password, role: 'patient' })
             res.redirect('/login')
         } catch (error) {
+            if (error.name === 'SequelizeValidationError') {
+                const errors = error.errors.map(el => el.message)
+                return res.render('register', { error: errors[0] })
+            }
+            if (error.name === 'SequelizeUniqueConstraintError') {
+                return res.render('register', { error: 'Email already registered' })
+            }
+            console.log(error)
             res.send(error)
         }
     }

@@ -12,5 +12,10 @@ router.post('/book', PatientController.createBooking)
 
 router.get('/bookings', PatientController.myBookings)
 
+router.get('/doctors', PatientController.showDoctors)
+
+router.get('/profile', PatientController.showProfile)
+router.post('/profile', PatientController.updateProfile)
+
 
 module.exports = router;

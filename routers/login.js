@@ -2,7 +2,7 @@ const LoginController = require('../controllers/loginController')
 const router = require('express').Router()
 
 router.get('/', (req, res) => {
-    res.redirect('/login')
+    res.render('landing')
 })
 
 router.get('/login', LoginController.showLogin)

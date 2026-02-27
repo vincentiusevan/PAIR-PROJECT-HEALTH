@@ -1,0 +1,80 @@
+<%- include('headerPatients') %>
+
+<main>
+    <div class="container">
+        <div class="title">
+            <h1>My Profile</h1>
+            <% if (typeof notif !== 'undefined' && notif) { %>
+                <div class="notifDelete" style="background:#10b981;">
+                    <p><%= notif %></p>
+                </div>
+            <% } %>
+            <% if (typeof errors !== 'undefined' && errors) { %>
+                <div class="errors">
+                    <h3>WARNING !!</h3>
+                    <% errors.forEach(err => { %>
+                        <p><%= err %></p>
+                    <% }) %>
+                </div>
+            <% } %>
+        </div>
+
+        <div class="content" style="display:flex; gap:40px; flex-direction:row; align-items:flex-start;">
+
+            <!-- LEFT: User Info (read only) -->
+            <div style="flex:1; display:flex; flex-direction:column; gap:15px;">
+                <h3 style="color:#16bbf7; border-bottom:2px solid #16bbf7; padding-bottom:8px;">Account Info</h3>
+                <div class="column">
+                    <label>Username</label>
+                    <input type="text" value="<%= user.username %>" disabled style="background:#f0f0f0; color:#999;">
+                </div>
+                <div class="column">
+                    <label>Email</label>
+                    <input type="text" value="<%= user.email %>" disabled style="background:#f0f0f0; color:#999;">
+                </div>
+                <div class="column">
+                    <label>Role</label>
+                    <input type="text" value="<%= user.role %>" disabled style="background:#f0f0f0; color:#999;">
+                </div>
+                <div class="column">
+                    <label>Age</label>
+                    <input type="text" value="<%= user.age || '-' %>" disabled style="background:#f0f0f0; color:#999;">
+                </div>
+                <div class="column">
+                    <label>Gender</label>
+                    <input type="text" value="<%= user.gender || '-' %>" disabled style="background:#f0f0f0; color:#999;">
+                </div>
+            </div>
+
+            <!-- RIGHT: UserProfile (editable) -->
+            <div style="flex:1; display:flex; flex-direction:column; gap:15px;">
+                <h3 style="color:#16bbf7; border-bottom:2px solid #16bbf7; padding-bottom:8px;">Health Profile</h3>
+                <form action="/patients/profile" method="post" style="display:flex; flex-direction:column; gap:15px;">
+                    <div class="column">
+                        <label>Blood Type</label>
+                        <select name="bloodType">
+                            <option value="" disabled <%= !profile || !profile.bloodType ? 'selected' : '' %>>Choose Blood Type</option>
+                            <% ['A', 'B', 'AB', 'O'].forEach(bt => { %>
+                                <option value="<%= bt %>" <%= profile && profile.bloodType === bt ? 'selected' : '' %>><%= bt %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="column">
+                        <label>Address</label>
+                        <input type="text" name="address" value="<%= profile ? profile.address || '' : '' %>" placeholder="Enter your address">
+                    </div>
+                    <div class="column">
+                        <label>Phone Number</label>
+                        <input type="text" name="phone" value="<%= profile ? profile.phone || '' : '' %>" placeholder="Enter your phone number">
+                    </div>
+                    <div class="column">
+                        <button class="btn" type="submit">Save Profile</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<%- include('footerDoctors') %>

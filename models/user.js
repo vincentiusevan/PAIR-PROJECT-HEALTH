@@ -1,8 +1,5 @@
 'use strict';
-const {
-  Model,
-  STRING
-} = require('sequelize');
+const { Model } = require('sequelize');
 const bcrypt = require('bcryptjs')
 
 module.exports = (sequelize, DataTypes) => {
@@ -14,24 +11,49 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.hasMany(models.Booking, { foreignKey: "UserId" });
+      User.hasOne(models.UserProfile, { foreignKey: 'UserId' });
     }
   }
   User.init({
     username: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Username is required'
+        },
+        notEmpty: {
+          msg: 'Username is required'
+        }
+      }
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true
+        notNull: {
+          msg: 'Email is required'
+        },
+        notEmpty: {
+          msg: 'Email is required'
+        },
+        isEmail: {
+          msg: 'Invalid email format'
+        }
       }
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Password is required'
+        },
+        notEmpty: {
+          msg: 'Password is required'
+        }
+      }
     },
     role: {
       type: DataTypes.STRING,
