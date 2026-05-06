@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
 
-    // Instance method
+    // Instance method untuk switch status
     changeStatus(newStatus) {
       if (this.status === "done") {
         throw new Error("Status is done, cannot be changed");
@@ -41,9 +41,9 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: 'Booking date is required'
-          }
-        }
+            msg: "Booking date is required",
+          },
+        },
       },
       status: DataTypes.STRING,
       UserId: {
@@ -51,9 +51,9 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: 'User is required'
-          }
-        }
+            msg: "User is required",
+          },
+        },
       },
       DoctorId: DataTypes.INTEGER,
 
@@ -62,9 +62,9 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: 'Please select at least one symptom'
-          }
-        }
+            msg: "Please select at least one symptom",
+          },
+        },
       },
     },
     {
@@ -75,7 +75,7 @@ module.exports = (sequelize, DataTypes) => {
 
   // agar setap booking baru statusny pending
   Booking.addHook("beforeCreate", (booking) => {
-    booking.status = "pending";
+    booking.status = "confirmed";
   });
 
   return Booking;
